@@ -49,6 +49,7 @@ class OVOSTranslateServer(LanguageTranslator):
                           source: str = ""):
         target = target or self.internal_language
 
+        text = text.replace("/", "-")  # HACK - if text has a / the url is invalid
         for url in servers:
             try:
                 if not source and not self.skip_detection:
