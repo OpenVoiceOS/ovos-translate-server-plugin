@@ -8,8 +8,8 @@ from ovos_utils.log import LOG
 
 class OVOSTranslateServer(LanguageTranslator):
     public_servers = [
-        "https://translator.smartgic.io/nllb",
-        "http://24.199.127.142:9686"  # TODO nllb.openvoice.org domain
+        "https://nllb.openvoiceos.org",
+        "https://translator.smartgic.io/nllb"
     ]
 
     def __init__(self, *args, **kwargs):
