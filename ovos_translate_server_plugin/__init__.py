@@ -3,6 +3,7 @@ from typing import Union, List
 
 import requests
 from ovos_plugin_manager.templates.language import LanguageTranslator
+from ovos_utils.log import LOG
 
 
 class OVOSTranslateServer(LanguageTranslator):
@@ -14,6 +15,8 @@ class OVOSTranslateServer(LanguageTranslator):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.host = self.config.get("host", None)
+        # detect source lang before making query
+        self.skip_detection = self.config.get("skip_detection", False)
 
     def translate(self,
                   text: Union[str, List[str]],
@@ -39,15 +42,31 @@ class OVOSTranslateServer(LanguageTranslator):
             servers = self.public_servers
             random.shuffle(servers)  # Spread the load among all public servers
 
-        return self._get_from_servers(text, target, source, servers)
+        return self._get_from_servers(servers, text, target, source)
 
-    def _get_from_servers(self, text: str,
-                          target: str,
-                          source: str,
-                          servers: list):
+    def _get_from_servers(self, servers: list, text: str,
+                          target: str = "",
+                          source: str = ""):
+        target = target or self.internal_language
+
         for url in servers:
             try:
-                r = requests.get(f'{url}/translate/{source}/{target}/{text}')
+                if not source and not self.skip_detection:
+                    # call lang detect endpoint
+                    r = requests.get(f'{url}/detect/{text}')
+                    try:
+                        source = r.json()[0]
+                    except:
+                        source = r.text
+                    LOG.debug(f"detected language: {source}")
+
+                if source:
+                    u = f'{url}/translate/{source}/{target}/{text}'
+                else:
+                    # let the server plugin determine source lang by itself
+                    u = f'{url}/translate/{target}/{text}'
+
+                r = requests.get(u)
                 if r.ok:
                     return r.text
             except:
@@ -61,9 +80,10 @@ if __name__ == "__main__":
 
     tx = OVOSTranslateServer()
 
-    utts = ["Hola Mundo"]
+    utts = "Hola Mundo"
 
     print("Translations:", tx.translate(utts, tgt, src))
+    print("Translations:", tx.translate(utts, tgt))
 
     utts = "hello world"
 
