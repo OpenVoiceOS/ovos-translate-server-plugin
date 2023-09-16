@@ -9,7 +9,8 @@ from ovos_utils.log import LOG
 class OVOSTranslateServer(LanguageTranslator):
     public_servers = [
         "https://nllb.openvoiceos.org",
-        "https://translator.smartgic.io/nllb"
+        "https://translator.smartgic.io/nllb",
+        "https://ovosnllb.ziggyai.online"
     ]
 
     def __init__(self, *args, **kwargs):
