@@ -4,7 +4,7 @@ Language Plugin for [ovos translate server](https://github.com/OpenVoiceOS/ovos-
 
 ### OVOS
 
-The plugin is used in a wider context to translate utterances/texts on demand (e.g. from a [UniversalSkill]())
+The plugin is used in a wider context to translate utterances/texts on demand (e.g. from [ovos-bidirectional-translation-plugin](https://github.com/OpenVoiceOS/ovos-bidirectional-translation-plugin))
 
 _Configuration_
 ```python
