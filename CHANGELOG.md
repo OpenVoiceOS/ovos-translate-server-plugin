@@ -1,5 +1,17 @@
 # Changelog
 
+## [Unreleased](https://github.com/OpenVoiceOS/ovos-translate-server-plugin/tree/HEAD)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-translate-server-plugin/compare/V0.0.0a5...HEAD)
+
+**Implemented enhancements:**
+
+- added ovosnllb.ziggyai.online [\#1](https://github.com/OpenVoiceOS/ovos-translate-server-plugin/pull/1) ([builderjer](https://github.com/builderjer))
+
+## [V0.0.0a5](https://github.com/OpenVoiceOS/ovos-translate-server-plugin/tree/V0.0.0a5) (2023-08-22)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-translate-server-plugin/compare/V0.0.0a4...V0.0.0a5)
+
 ## [V0.0.0a4](https://github.com/OpenVoiceOS/ovos-translate-server-plugin/tree/V0.0.0a4) (2023-08-22)
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos-translate-server-plugin/compare/V0.0.0a3...V0.0.0a4)
