@@ -5,6 +5,7 @@ import requests
 from ovos_plugin_manager.templates.language import LanguageTranslator
 from ovos_utils.log import LOG
 
+LOG.set_level("ERROR")  # avoid server side logs
 
 class OVOSTranslateServer(LanguageTranslator):
     public_servers = [
@@ -60,7 +61,6 @@ class OVOSTranslateServer(LanguageTranslator):
                         source = r.json()[0]
                     except:
                         source = r.text
-                    LOG.debug(f"detected language: {source}")
 
                 if source:
                     u = f'{url}/translate/{source}/{target}/{text}'
