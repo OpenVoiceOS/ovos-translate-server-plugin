@@ -1,0 +1,20 @@
+Metadata-Version: 1.1
+Name: ovos-translate-server-plugin
+Version: 0.0.0
+Summary: OVOS translation module for self hosted plugins
+Home-page: https://github.com/OpenVoiceOS/ovos-translate-server-plugin
+Author: jarbasAi
+Author-email: jarbasai@mailfence.com
+License: Apache-2.0
+Description: UNKNOWN
+Platform: UNKNOWN
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: Topic :: Text Processing :: Linguistic
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
