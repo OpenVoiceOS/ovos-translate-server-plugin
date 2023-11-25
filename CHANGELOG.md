@@ -1,8 +1,8 @@
 # Changelog
 
-## [Unreleased](https://github.com/OpenVoiceOS/ovos-translate-server-plugin/tree/HEAD)
+## [V0.0.0a6](https://github.com/OpenVoiceOS/ovos-translate-server-plugin/tree/V0.0.0a6) (2023-10-14)
 
-[Full Changelog](https://github.com/OpenVoiceOS/ovos-translate-server-plugin/compare/V0.0.0a5...HEAD)
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-translate-server-plugin/compare/V0.0.0a5...V0.0.0a6)
 
 **Implemented enhancements:**
 
