@@ -1,5 +1,9 @@
 # Changelog
 
+## [V0.0.1a2](https://github.com/OpenVoiceOS/ovos-translate-server-plugin/tree/V0.0.1a2) (2024-02-23)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-translate-server-plugin/compare/V0.0.1a1...V0.0.1a2)
+
 ## [V0.0.1a1](https://github.com/OpenVoiceOS/ovos-translate-server-plugin/tree/V0.0.1a1) (2024-02-23)
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos-translate-server-plugin/compare/V0.0.0...V0.0.1a1)
