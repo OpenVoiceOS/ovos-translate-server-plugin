@@ -2,8 +2,58 @@ import random
 from typing import Union, List
 
 import requests
+from ovos_plugin_manager.templates.language import LanguageDetector
 from ovos_plugin_manager.templates.language import LanguageTranslator
-from ovos_utils.log import LOG
+
+
+class OVOSLangDetectServer(LanguageDetector):
+    public_servers = [
+        "https://nllb.openvoiceos.org",
+        "https://translator.smartgic.io/nllb",
+        "https://ovosnllb.ziggyai.online"
+    ]
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.host = self.config.get("host", None)
+
+    def detect(self, text):
+        text = text.replace("/", "-")  # HACK - if text has a / the url is invalid
+        for url in self.get_servers():
+            try:
+                # call lang detect endpoint
+                r = requests.get(f'{url}/detect/{text}')
+                if r.ok:
+                    try:
+                        return r.json()[0]
+                    except:
+                        return r.text
+            except:
+                continue
+        raise RuntimeError(f"All OVOS Translate servers are down!")
+
+    def detect_probs(self, text):
+        text = text.replace("/", "-")  # HACK - if text has a / the url is invalid
+        for url in self.get_servers():
+            try:
+                # call lang detect endpoint
+                r = requests.get(f'{url}/classify/{text}')
+                if r.ok:
+                    return r.json()
+            except:
+                continue
+        raise RuntimeError(f"All OVOS Translate servers are down!")
+
+    def get_servers(self):
+        if self.host:
+            if isinstance(self.host, str):
+                servers = [self.host]
+            else:
+                servers = self.host
+        else:
+            servers = self.public_servers
+            random.shuffle(servers)  # Spread the load among all public servers
+        return servers
 
 
 class OVOSTranslateServer(LanguageTranslator):
@@ -34,24 +84,10 @@ class OVOSTranslateServer(LanguageTranslator):
         Returns:
             Union[str, List[str]]: translation(s)
         """
-        if self.host:
-            if isinstance(self.host, str):
-                servers = [self.host]
-            else:
-                servers = self.host
-        else:
-            servers = self.public_servers
-            random.shuffle(servers)  # Spread the load among all public servers
-
-        return self._get_from_servers(servers, text, target, source)
-
-    def _get_from_servers(self, servers: list, text: str,
-                          target: str = "",
-                          source: str = ""):
         target = target or self.internal_language
 
         text = text.replace("/", "-")  # HACK - if text has a / the url is invalid
-        for url in servers:
+        for url in self.get_servers():
             try:
                 if not source and not self.skip_detection:
                     # call lang detect endpoint
@@ -60,7 +96,6 @@ class OVOSTranslateServer(LanguageTranslator):
                         source = r.json()[0]
                     except:
                         source = r.text
-                    LOG.debug(f"detected language: {source}")
 
                 if source:
                     u = f'{url}/translate/{source}/{target}/{text}'
@@ -75,8 +110,21 @@ class OVOSTranslateServer(LanguageTranslator):
                 continue
         raise RuntimeError(f"All OVOS Translate servers are down!")
 
+    def get_servers(self):
+        if self.host:
+            if isinstance(self.host, str):
+                servers = [self.host]
+            else:
+                servers = self.host
+        else:
+            servers = self.public_servers
+            random.shuffle(servers)  # Spread the load among all public servers
+        return servers
+
 
 if __name__ == "__main__":
+    dt = OVOSLangDetectServer()
+
     src = "es"
     tgt = "en-us"
 
@@ -84,9 +132,11 @@ if __name__ == "__main__":
 
     utts = "Hola Mundo"
 
+    print("Detections: ", dt.detect_probs(utts))
     print("Translations:", tx.translate(utts, tgt, src))
     print("Translations:", tx.translate(utts, tgt))
 
     utts = "hello world"
 
+    print("Detections: ", dt.detect_probs(utts))
     print("Translations:", tx.translate(utts, src, tgt))
