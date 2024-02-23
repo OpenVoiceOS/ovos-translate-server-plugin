@@ -1,3 +1,0 @@
-[neon.plugin.lang.translate]
-ovos-translate-plugin-server = ovos_translate_server_plugin:OVOSTranslateServer
-
