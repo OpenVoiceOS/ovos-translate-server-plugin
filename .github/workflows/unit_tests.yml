@@ -49,7 +49,7 @@ jobs:
           pip install -e .[test]
       - name: Perform unittests
         run: |
-          pytest --cov=ovos_translate_server_plugin --cov-report xml test/unittests/
+          pytest --cov=ovos_translate_server_plugin --cov-report xml test/
       - name: Upload coverage
         uses: codecov/codecov-action@v3
         with:
