@@ -47,7 +47,7 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install pytest pytest-cov
-          pip install -e .[test]
+          pip install -e .
       - name: Perform unittests
         run: |
           pytest --cov=ovos_translate_server_plugin --cov-report xml test/
