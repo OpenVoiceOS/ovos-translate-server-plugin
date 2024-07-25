@@ -1,5 +1,17 @@
 # Changelog
 
+## [Unreleased](https://github.com/OpenVoiceOS/ovos-translate-server-plugin/tree/HEAD)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-translate-server-plugin/compare/V0.0.1a3...HEAD)
+
+**Merged pull requests:**
+
+- tests/docstrs\_typing\_tests [\#3](https://github.com/OpenVoiceOS/ovos-translate-server-plugin/pull/3) ([JarbasAl](https://github.com/JarbasAl))
+
+## [V0.0.1a3](https://github.com/OpenVoiceOS/ovos-translate-server-plugin/tree/V0.0.1a3) (2024-02-23)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-translate-server-plugin/compare/V0.0.1a2...V0.0.1a3)
+
 ## [V0.0.1a2](https://github.com/OpenVoiceOS/ovos-translate-server-plugin/tree/V0.0.1a2) (2024-02-23)
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos-translate-server-plugin/compare/V0.0.1a1...V0.0.1a2)
