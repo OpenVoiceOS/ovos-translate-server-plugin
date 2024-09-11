@@ -3,6 +3,7 @@ from setuptools import setup
 
 BASEDIR = os.path.abspath(os.path.dirname(__file__))
 TX_ENTRY_POINT = 'ovos-translate-plugin-server = ovos_translate_server_plugin:OVOSTranslateServer'
+DT_ENTRY_POINT = 'ovos-lang-detector-plugin-server = ovos_translate_server_plugin:OVOSLangDetectServer'
 
 
 def get_version():
@@ -75,6 +76,7 @@ setup(
         'Programming Language :: Python :: 3.11',
     ],
     entry_points={
-        'neon.plugin.lang.translate': TX_ENTRY_POINT
+        'neon.plugin.lang.translate': TX_ENTRY_POINT,
+        'neon.plugin.lang.detect': DT_ENTRY_POINT
     }
 )

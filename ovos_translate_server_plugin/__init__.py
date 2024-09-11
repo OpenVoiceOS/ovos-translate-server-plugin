@@ -1,38 +1,80 @@
 import random
-from typing import Union, List
+from typing import Union, List, Dict, Optional
 
 import requests
-from ovos_plugin_manager.templates.language import LanguageTranslator
-from ovos_utils.log import LOG
+from ovos_plugin_manager.templates.language import LanguageDetector, LanguageTranslator
 
 
-class OVOSTranslateServer(LanguageTranslator):
+class OVOSLangDetectServer(LanguageDetector):
+    PUBLIC_MODEL = "ovos-lang-detector-fasttext-plugin"  # manually maintained, public servers need to respect this to get added to list
     public_servers = [
         "https://nllb.openvoiceos.org",
         "https://translator.smartgic.io/nllb",
-        "https://ovosnllb.ziggyai.online"
+        # "https://ovosnllb.ziggyai.online"  # TODO - not yet using fasttext, needs to update container
     ]
 
     def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.host = self.config.get("host", None)
-        # detect source lang before making query
-        self.skip_detection = self.config.get("skip_detection", False)
-
-    def translate(self,
-                  text: Union[str, List[str]],
-                  target: str = "",
-                  source: str = "") -> Union[str, List[str]]:
         """
-        NLLB200 translate text(s) into the target language.
+        Initialize the language detection server.
 
         Args:
-            text (Union[str, List[str]]): sentence(s) to translate
-            target (str, optional): target langcode. Defaults to "".
-            source (str, optional): source langcode. Defaults to "".
+            *args: Variable length argument list.
+            **kwargs: Arbitrary keyword arguments.
+        """
+        super().__init__(*args, **kwargs)
+        self.host: Optional[Union[str, List[str]]] = self.config.get("host", None)
+
+    def detect(self, text: str) -> str:
+        """
+        Detect the language of the given text.
+
+        Args:
+            text (str): Text to detect the language for.
 
         Returns:
-            Union[str, List[str]]: translation(s)
+            str: Detected language code.
+        """
+        text = text.replace("/", "-")  # HACK - if text has a / the url is invalid
+        for url in self.get_servers():
+            try:
+                # call lang detect endpoint
+                r = requests.get(f'{url}/detect/{text}')
+                if r.ok:
+                    try:
+                        return r.json()[0]
+                    except:
+                        return r.text
+            except:
+                continue
+        raise RuntimeError("All OVOS Translate servers are down!")
+
+    def detect_probs(self, text: str) -> Dict[str, float]:
+        """
+        Detect the language probabilities for the given text.
+
+        Args:
+            text (str): Text to detect the language probabilities for.
+
+        Returns:
+            Dict[str, float]: Dictionary of language codes and their probabilities.
+        """
+        text = text.replace("/", "-")  # HACK - if text has a / the url is invalid
+        for url in self.get_servers():
+            try:
+                # call lang detect endpoint
+                r = requests.get(f'{url}/classify/{text}')
+                if r.ok:
+                    return r.json()
+            except:
+                continue
+        raise RuntimeError("All OVOS Translate servers are down!")
+
+    def get_servers(self) -> List[str]:
+        """
+        Get the list of servers to use for language detection.
+
+        Returns:
+            List[str]: List of server URLs.
         """
         if self.host:
             if isinstance(self.host, str):
@@ -42,16 +84,48 @@ class OVOSTranslateServer(LanguageTranslator):
         else:
             servers = self.public_servers
             random.shuffle(servers)  # Spread the load among all public servers
+        return servers
 
-        return self._get_from_servers(servers, text, target, source)
 
-    def _get_from_servers(self, servers: list, text: str,
-                          target: str = "",
-                          source: str = ""):
+class OVOSTranslateServer(LanguageTranslator):
+    PUBLIC_MODEL = "ovos-translate-plugin-nllb"  # manually maintained, public servers need to respect this to get added to list
+    public_servers = [
+        "https://nllb.openvoiceos.org",
+        "https://translator.smartgic.io/nllb",
+        "https://ovosnllb.ziggyai.online"
+    ]
+
+    def __init__(self, *args, **kwargs):
+        """
+        Initialize the translation server.
+
+        Args:
+            *args: Variable length argument list.
+            **kwargs: Arbitrary keyword arguments.
+        """
+        super().__init__(*args, **kwargs)
+        self.host: Optional[Union[str, List[str]]] = self.config.get("host", None)
+        self.skip_detection: bool = self.config.get("skip_detection", False)
+
+    def translate(self,
+                  text: Union[str, List[str]],
+                  target: str = "",
+                  source: str = "") -> Union[str, List[str]]:
+        """
+        NLLB200 translate text(s) into the target language.
+
+        Args:
+            text (Union[str, List[str]]): Sentence(s) to translate.
+            target (str, optional): Target language code. Defaults to "".
+            source (str, optional): Source language code. Defaults to "".
+
+        Returns:
+            Union[str, List[str]]: Translation(s).
+        """
         target = target or self.internal_language
 
         text = text.replace("/", "-")  # HACK - if text has a / the url is invalid
-        for url in servers:
+        for url in self.get_servers():
             try:
                 if not source and not self.skip_detection:
                     # call lang detect endpoint
@@ -60,7 +134,6 @@ class OVOSTranslateServer(LanguageTranslator):
                         source = r.json()[0]
                     except:
                         source = r.text
-                    LOG.debug(f"detected language: {source}")
 
                 if source:
                     u = f'{url}/translate/{source}/{target}/{text}'
@@ -73,10 +146,29 @@ class OVOSTranslateServer(LanguageTranslator):
                     return r.text
             except:
                 continue
-        raise RuntimeError(f"All OVOS Translate servers are down!")
+        raise RuntimeError("All OVOS Translate servers are down!")
+
+    def get_servers(self) -> List[str]:
+        """
+        Get the list of servers to use for translation.
+
+        Returns:
+            List[str]: List of server URLs.
+        """
+        if self.host:
+            if isinstance(self.host, str):
+                servers = [self.host]
+            else:
+                servers = self.host
+        else:
+            servers = self.public_servers
+            random.shuffle(servers)  # Spread the load among all public servers
+        return servers
 
 
 if __name__ == "__main__":
+    dt = OVOSLangDetectServer()
+
     src = "es"
     tgt = "en-us"
 
@@ -84,9 +176,11 @@ if __name__ == "__main__":
 
     utts = "Hola Mundo"
 
+    print("Detections: ", dt.detect_probs(utts))
     print("Translations:", tx.translate(utts, tgt, src))
     print("Translations:", tx.translate(utts, tgt))
 
     utts = "hello world"
 
+    print("Detections: ", dt.detect_probs(utts))
     print("Translations:", tx.translate(utts, src, tgt))
