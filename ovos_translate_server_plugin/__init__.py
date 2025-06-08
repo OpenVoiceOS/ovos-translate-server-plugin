@@ -1,8 +1,8 @@
 import random
-from typing import Union, List, Dict, Optional
-
 import requests
 from ovos_plugin_manager.templates.language import LanguageDetector, LanguageTranslator
+from ovos_utils import classproperty
+from typing import Union, List, Dict, Optional, Set
 
 
 class OVOSLangDetectServer(LanguageDetector):
@@ -86,6 +86,16 @@ class OVOSLangDetectServer(LanguageDetector):
             random.shuffle(servers)  # Spread the load among all public servers
         return servers
 
+    @classproperty
+    def available_languages(cls) -> Set[str]:
+        """
+        Get the available target languages with the service.
+
+        Returns:
+            Set[str]: A set of language codes.
+        """
+        return set()
+
 
 class OVOSTranslateServer(LanguageTranslator):
     PUBLIC_MODEL = "ovos-translate-plugin-nllb"  # manually maintained, public servers need to respect this to get added to list
@@ -164,6 +174,28 @@ class OVOSTranslateServer(LanguageTranslator):
             servers = self.public_servers
             random.shuffle(servers)  # Spread the load among all public servers
         return servers
+
+    @classproperty
+    def available_languages(cls) -> Set[str]:
+        """
+        Get the available target languages with the service.
+
+        Returns:
+            Set[str]: A set of language codes.
+        """
+        return set()
+
+    def supported_translations(self, source_lang: str) -> Set[str]:
+        """
+        Get the set of target languages to which the source language can be translated.
+
+        Args:
+            source_lang (Optional[str]): The source language code.
+
+        Returns:
+            Set[str]: A set of language codes that the source language can be translated to.
+        """
+        return self.available_languages
 
 
 if __name__ == "__main__":
