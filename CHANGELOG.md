@@ -1,36 +1,16 @@
 # Changelog
 
-## [0.0.2a1](https://github.com/OpenVoiceOS/ovos-translate-server-plugin/tree/0.0.2a1) (2024-09-11)
+## [0.0.3a1](https://github.com/OpenVoiceOS/ovos-translate-server-plugin/tree/0.0.3a1) (2025-06-08)
 
-[Full Changelog](https://github.com/OpenVoiceOS/ovos-translate-server-plugin/compare/V0.0.1a4...0.0.2a1)
-
-**Merged pull requests:**
-
-- feat:semver [\#4](https://github.com/OpenVoiceOS/ovos-translate-server-plugin/pull/4) ([JarbasAl](https://github.com/JarbasAl))
-
-## [V0.0.1a4](https://github.com/OpenVoiceOS/ovos-translate-server-plugin/tree/V0.0.1a4) (2024-07-25)
-
-[Full Changelog](https://github.com/OpenVoiceOS/ovos-translate-server-plugin/compare/V0.0.1a3...V0.0.1a4)
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-translate-server-plugin/compare/V0.0.2...0.0.3a1)
 
 **Merged pull requests:**
 
-- tests/docstrs\_typing\_tests [\#3](https://github.com/OpenVoiceOS/ovos-translate-server-plugin/pull/3) ([JarbasAl](https://github.com/JarbasAl))
+- fix: compatibility with ovos-plugin-manager 1.X.X [\#6](https://github.com/OpenVoiceOS/ovos-translate-server-plugin/pull/6) ([JarbasAl](https://github.com/JarbasAl))
 
-## [V0.0.1a3](https://github.com/OpenVoiceOS/ovos-translate-server-plugin/tree/V0.0.1a3) (2024-02-23)
+## [V0.0.2](https://github.com/OpenVoiceOS/ovos-translate-server-plugin/tree/V0.0.2) (2024-09-11)
 
-[Full Changelog](https://github.com/OpenVoiceOS/ovos-translate-server-plugin/compare/V0.0.1a2...V0.0.1a3)
-
-## [V0.0.1a2](https://github.com/OpenVoiceOS/ovos-translate-server-plugin/tree/V0.0.1a2) (2024-02-23)
-
-[Full Changelog](https://github.com/OpenVoiceOS/ovos-translate-server-plugin/compare/V0.0.1a1...V0.0.1a2)
-
-## [V0.0.1a1](https://github.com/OpenVoiceOS/ovos-translate-server-plugin/tree/V0.0.1a1) (2024-02-23)
-
-[Full Changelog](https://github.com/OpenVoiceOS/ovos-translate-server-plugin/compare/V0.0.0...V0.0.1a1)
-
-**Implemented enhancements:**
-
-- feat: lang detect servers [\#2](https://github.com/OpenVoiceOS/ovos-translate-server-plugin/pull/2) ([JarbasAl](https://github.com/JarbasAl))
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-translate-server-plugin/compare/0.0.2...V0.0.2)
 
 
 
