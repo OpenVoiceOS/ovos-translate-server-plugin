@@ -51,7 +51,7 @@ def required(requirements_file):
 
 
 setup(
-    name='ovos-translate-server-plugin',
+    name='ovos_translate_server_plugin',
     version=get_version(),
     description='OVOS translation module for self hosted plugins',
     url='https://github.com/OpenVoiceOS/ovos-translate-server-plugin',
