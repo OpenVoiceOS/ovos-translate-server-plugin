@@ -1,16 +1,16 @@
 # Changelog
 
-## [0.0.5a1](https://github.com/OpenVoiceOS/ovos-translate-server-plugin/tree/0.0.5a1) (2025-11-05)
+## [0.0.6a1](https://github.com/OpenVoiceOS/ovos-translate-server-plugin/tree/0.0.6a1) (2025-12-18)
 
-[Full Changelog](https://github.com/OpenVoiceOS/ovos-translate-server-plugin/compare/V0.0.4...0.0.5a1)
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-translate-server-plugin/compare/V0.0.5...0.0.6a1)
 
 **Merged pull requests:**
 
-- Update requirements.txt [\#9](https://github.com/OpenVoiceOS/ovos-translate-server-plugin/pull/9) ([JarbasAl](https://github.com/JarbasAl))
+- chore: Configure Renovate [\#11](https://github.com/OpenVoiceOS/ovos-translate-server-plugin/pull/11) ([renovate[bot]](https://github.com/apps/renovate))
 
-## [V0.0.4](https://github.com/OpenVoiceOS/ovos-translate-server-plugin/tree/V0.0.4) (2025-06-08)
+## [V0.0.5](https://github.com/OpenVoiceOS/ovos-translate-server-plugin/tree/V0.0.5) (2025-11-05)
 
-[Full Changelog](https://github.com/OpenVoiceOS/ovos-translate-server-plugin/compare/0.0.4...V0.0.4)
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-translate-server-plugin/compare/0.0.5...V0.0.5)
 
 
 
