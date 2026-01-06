@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.0.6a4](https://github.com/OpenVoiceOS/ovos-translate-server-plugin/tree/0.0.6a4) (2026-01-06)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-translate-server-plugin/compare/0.0.6a3...0.0.6a4)
+
+**Merged pull requests:**
+
+- add tigregotico.pt server [\#18](https://github.com/OpenVoiceOS/ovos-translate-server-plugin/pull/18) ([JarbasAl](https://github.com/JarbasAl))
+- chore\(deps\): update actions/checkout action to v6 [\#14](https://github.com/OpenVoiceOS/ovos-translate-server-plugin/pull/14) ([renovate[bot]](https://github.com/apps/renovate))
+
 ## [0.0.6a3](https://github.com/OpenVoiceOS/ovos-translate-server-plugin/tree/0.0.6a3) (2025-12-19)
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos-translate-server-plugin/compare/0.0.6a2...0.0.6a3)
