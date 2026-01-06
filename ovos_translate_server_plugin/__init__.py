@@ -100,7 +100,7 @@ class OVOSLangDetectServer(LanguageDetector):
 class OVOSTranslateServer(LanguageTranslator):
     PUBLIC_MODEL = "ovos-translate-plugin-nllb"  # manually maintained, public servers need to respect this to get added to list
     public_servers = [
-        "https://nllb.openvoiceos.org",
+        "https://nllb.tigregotico.pt",
         "https://translator.smartgic.io/nllb",
         "https://ovosnllb.ziggyai.online"
     ]
