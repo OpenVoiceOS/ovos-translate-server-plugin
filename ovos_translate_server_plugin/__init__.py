@@ -8,7 +8,7 @@ from typing import Union, List, Dict, Optional, Set
 class OVOSLangDetectServer(LanguageDetector):
     PUBLIC_MODEL = "ovos-lang-detector-fasttext-plugin"  # manually maintained, public servers need to respect this to get added to list
     public_servers = [
-        "https://nllb.openvoiceos.org",
+        "https://nllb.tigregotico.pt",
         "https://translator.smartgic.io/nllb",
         # "https://ovosnllb.ziggyai.online"  # TODO - not yet using fasttext, needs to update container
     ]
