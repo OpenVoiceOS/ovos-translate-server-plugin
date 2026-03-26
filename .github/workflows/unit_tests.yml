@@ -52,7 +52,7 @@ jobs:
         run: |
           pytest --cov=ovos_translate_server_plugin --cov-report xml test/
       - name: Upload coverage
-        uses: codecov/codecov-action@v3
+        uses: codecov/codecov-action@v6
         with:
             token: ${{secrets.CODECOV_TOKEN}} 
             flags: unittests
