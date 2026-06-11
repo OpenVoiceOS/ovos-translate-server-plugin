@@ -5,7 +5,7 @@ from ovos_utils import classproperty
 from ovos_utils.log import LOG
 from typing import Union, List, Dict, Optional, Set
 
-_DEFAULT_TIMEOUT = 20  # seconds
+_DEFAULT_TIMEOUT = 5  # seconds
 
 
 class OVOSLangDetectServer(LanguageDetector):
