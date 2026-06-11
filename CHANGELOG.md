@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.0.7a1](https://github.com/OpenVoiceOS/ovos-translate-server-plugin/tree/0.0.7a1) (2026-06-11)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-translate-server-plugin/compare/0.0.6a6...0.0.7a1)
+
+**Closed issues:**
+
+- No request timeout — hung public server stalls instead of failing over [\#20](https://github.com/OpenVoiceOS/ovos-translate-server-plugin/issues/20)
+
+**Merged pull requests:**
+
+- fix: configurable request timeout and 5xx failover on public servers [\#21](https://github.com/OpenVoiceOS/ovos-translate-server-plugin/pull/21) ([JarbasAl](https://github.com/JarbasAl))
+
 ## [0.0.6a6](https://github.com/OpenVoiceOS/ovos-translate-server-plugin/tree/0.0.6a6) (2026-01-06)
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos-translate-server-plugin/compare/0.0.6a4...0.0.6a6)
