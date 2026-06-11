@@ -4,9 +4,7 @@ from unittest.mock import patch, Mock, call
 
 import requests
 
-from ovos_translate_server_plugin import OVOSTranslateServer, OVOSLangDetectServer
-
-_DEFAULT_TIMEOUT = 20
+from ovos_translate_server_plugin import OVOSTranslateServer, OVOSLangDetectServer, _DEFAULT_TIMEOUT
 
 
 class TestTimeoutConfig(unittest.TestCase):
