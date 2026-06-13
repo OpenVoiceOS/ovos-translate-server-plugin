@@ -138,12 +138,29 @@ class OVOSTranslateServer(LanguageTranslator):
         """Request timeout in seconds (config key ``timeout``, default 20)."""
         return self.config.get("timeout", _DEFAULT_TIMEOUT)
 
+    @property
+    def server_type(self) -> str:
+        """Which server API to speak to.
+
+        ``ovos`` (default) talks to a native ovos-translate-server. Any other
+        value turns this plugin into an adapter for a third-party translation
+        API so it can target any compatible server:
+        - ``libretranslate``: any self-hosted/hosted LibreTranslate instance.
+        - ``deepl``: the official DeepL ``/v2/translate`` API.
+        """
+        return self.config.get("server_type", "ovos")
+
+    @property
+    def api_key(self) -> Optional[str]:
+        """API key for vendor server types. Optional for LibreTranslate."""
+        return self.config.get("api_key")
+
     def translate(self,
                   text: Union[str, List[str]],
                   target: str = "",
                   source: str = "") -> Union[str, List[str]]:
         """
-        NLLB200 translate text(s) into the target language.
+        Translate text(s) into the target language.
 
         Args:
             text (Union[str, List[str]]): Sentence(s) to translate.
@@ -154,6 +171,9 @@ class OVOSTranslateServer(LanguageTranslator):
             Union[str, List[str]]: Translation(s).
         """
         target = target or self.internal_language
+
+        if self.server_type != "ovos":
+            return self._translate_vendor(text, target, source)
 
         text = text.replace("/", "-")  # HACK - if text has a / the url is invalid
         for url in self.get_servers():
@@ -186,6 +206,64 @@ class OVOSTranslateServer(LanguageTranslator):
             except Exception:
                 LOG.exception(f"Error contacting {url}")
         raise RuntimeError("All OVOS Translate servers are down!")
+
+    def _translate_vendor(self, text: str, target: str, source: str) -> str:
+        """Translate via a third-party translation API (non-ovos server types)."""
+        if not self.host:
+            raise RuntimeError(
+                f"server_type={self.server_type!r} requires an explicit 'host'")
+        for url in self.get_servers():
+            try:
+                if self.server_type == "libretranslate":
+                    out = self._translate_libretranslate(url, text, target, source)
+                elif self.server_type == "deepl":
+                    out = self._translate_deepl(url, text, target, source)
+                else:
+                    raise RuntimeError(f"unknown server_type {self.server_type!r}")
+                if out is not None:
+                    return out
+            except requests.exceptions.Timeout:
+                LOG.warning(f"Timeout contacting {url} — trying next server")
+            except Exception:
+                LOG.exception(f"Error contacting {url}")
+        raise RuntimeError(f"All {self.server_type} translate servers are down!")
+
+    def _translate_libretranslate(self, url: str, text: str, target: str,
+                                  source: str) -> Optional[str]:
+        """LibreTranslate POST /translate."""
+        endpoint = f"{url.rstrip('/')}/translate"
+        body = {"q": text, "source": source or "auto", "target": target, "format": "text"}
+        if self.api_key:
+            body["api_key"] = self.api_key
+        r = requests.post(endpoint, data=body, timeout=self.timeout)
+        if r.status_code >= 500:
+            LOG.warning(f"Server error {r.status_code} from {endpoint} — trying next server")
+            return None
+        if r.ok:
+            return r.json()["translatedText"]
+        LOG.error(f"{r.status_code} response from {endpoint}: {r.text}")
+        return None
+
+    def _translate_deepl(self, url: str, text: str, target: str,
+                         source: str) -> Optional[str]:
+        """DeepL POST /v2/translate (DeepL uses upper-case language codes)."""
+        endpoint = url.rstrip("/")
+        if not endpoint.endswith("/v2/translate"):
+            endpoint += "/v2/translate"
+        headers = {}
+        if self.api_key:
+            headers["Authorization"] = f"DeepL-Auth-Key {self.api_key}"
+        data = {"text": text, "target_lang": target.upper()}
+        if source:
+            data["source_lang"] = source.upper()
+        r = requests.post(endpoint, data=data, headers=headers, timeout=self.timeout)
+        if r.status_code >= 500:
+            LOG.warning(f"Server error {r.status_code} from {endpoint} — trying next server")
+            return None
+        if r.ok:
+            return r.json()["translations"][0]["text"]
+        LOG.error(f"{r.status_code} response from {endpoint}: {r.text}")
+        return None
 
     def get_servers(self) -> List[str]:
         """
