@@ -1,12 +1,16 @@
 # Changelog
 
+## [0.0.7a2](https://github.com/OpenVoiceOS/ovos-translate-server-plugin/tree/0.0.7a2) (2026-06-16)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-translate-server-plugin/compare/0.0.7a1...0.0.7a2)
+
+**Merged pull requests:**
+
+- chore: add missing shared CI workflows [\#25](https://github.com/OpenVoiceOS/ovos-translate-server-plugin/pull/25) ([JarbasAl](https://github.com/JarbasAl))
+
 ## [0.0.7a1](https://github.com/OpenVoiceOS/ovos-translate-server-plugin/tree/0.0.7a1) (2026-06-11)
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos-translate-server-plugin/compare/0.0.6a6...0.0.7a1)
-
-**Closed issues:**
-
-- No request timeout — hung public server stalls instead of failing over [\#20](https://github.com/OpenVoiceOS/ovos-translate-server-plugin/issues/20)
 
 **Merged pull requests:**
 
