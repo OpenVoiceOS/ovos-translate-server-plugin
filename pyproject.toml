@@ -13,7 +13,7 @@ requires-python = ">=3.9"
 keywords = ["plugin", "lang", "detect", "translate", "OVOS", "OpenVoiceOS"]
 dependencies = [
     "requests",
-    "ovos-plugin-manager>=1.0.0,<3.0.0",
+    "ovos-plugin-manager>=2.1.0,<3.0.0",
 ]
 
 [project.urls]
