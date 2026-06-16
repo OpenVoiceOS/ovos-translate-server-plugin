@@ -20,10 +20,10 @@ dependencies = [
 Homepage = "https://github.com/OpenVoiceOS/ovos-translate-server-plugin"
 Repository = "https://github.com/OpenVoiceOS/ovos-translate-server-plugin"
 
-[project.entry-points."neon.plugin.lang.translate"]
+[project.entry-points."opm.lang.translate"]
 "ovos-translate-plugin-server" = "ovos_translate_server_plugin:OVOSTranslateServer"
 
-[project.entry-points."neon.plugin.lang.detect"]
+[project.entry-points."opm.lang.detect"]
 "ovos-lang-detector-plugin-server" = "ovos_translate_server_plugin:OVOSLangDetectServer"
 
 [tool.setuptools.packages.find]
