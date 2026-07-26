@@ -29,7 +29,7 @@ class OVOSLangDetectServer(LanguageDetector):
 
     @property
     def timeout(self) -> int:
-        """Request timeout in seconds (config key ``timeout``, default 20)."""
+        """Request timeout in seconds (config key ``timeout``, default 5)."""
         return self.config.get("timeout", _DEFAULT_TIMEOUT)
 
     def detect(self, text: str) -> str:
@@ -135,7 +135,7 @@ class OVOSTranslateServer(LanguageTranslator):
 
     @property
     def timeout(self) -> int:
-        """Request timeout in seconds (config key ``timeout``, default 20)."""
+        """Request timeout in seconds (config key ``timeout``, default 5)."""
         return self.config.get("timeout", _DEFAULT_TIMEOUT)
 
     def translate(self,
