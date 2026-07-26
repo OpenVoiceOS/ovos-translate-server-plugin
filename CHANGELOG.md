@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.0.8a2](https://github.com/OpenVoiceOS/ovos-translate-server-plugin/tree/0.0.8a2) (2026-07-26)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-translate-server-plugin/compare/0.0.8a1...0.0.8a2)
+
+**Merged pull requests:**
+
+- docs: timeout docstring says default 20 but code default is 5 [\#29](https://github.com/OpenVoiceOS/ovos-translate-server-plugin/pull/29) ([JarbasAl](https://github.com/JarbasAl))
+
 ## [0.0.8a1](https://github.com/OpenVoiceOS/ovos-translate-server-plugin/tree/0.0.8a1) (2026-06-16)
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos-translate-server-plugin/compare/0.0.7a2...0.0.8a1)
