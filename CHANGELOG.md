@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.0.8a3](https://github.com/OpenVoiceOS/ovos-translate-server-plugin/tree/0.0.8a3) (2026-08-01)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-translate-server-plugin/compare/0.0.8a2...0.0.8a3)
+
+**Merged pull requests:**
+
+- docs: rewrite README in Simplified Technical English [\#31](https://github.com/OpenVoiceOS/ovos-translate-server-plugin/pull/31) ([JarbasAl](https://github.com/JarbasAl))
+
 ## [0.0.8a2](https://github.com/OpenVoiceOS/ovos-translate-server-plugin/tree/0.0.8a2) (2026-07-26)
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos-translate-server-plugin/compare/0.0.8a1...0.0.8a2)
