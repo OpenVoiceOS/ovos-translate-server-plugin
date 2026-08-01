@@ -1,16 +1,85 @@
 # Changelog
 
-## [0.0.5a1](https://github.com/OpenVoiceOS/ovos-translate-server-plugin/tree/0.0.5a1) (2025-11-05)
+## [0.0.8a3](https://github.com/OpenVoiceOS/ovos-translate-server-plugin/tree/0.0.8a3) (2026-08-01)
 
-[Full Changelog](https://github.com/OpenVoiceOS/ovos-translate-server-plugin/compare/V0.0.4...0.0.5a1)
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-translate-server-plugin/compare/0.0.8a2...0.0.8a3)
 
 **Merged pull requests:**
 
-- Update requirements.txt [\#9](https://github.com/OpenVoiceOS/ovos-translate-server-plugin/pull/9) ([JarbasAl](https://github.com/JarbasAl))
+- docs: rewrite README in Simplified Technical English [\#31](https://github.com/OpenVoiceOS/ovos-translate-server-plugin/pull/31) ([JarbasAl](https://github.com/JarbasAl))
 
-## [V0.0.4](https://github.com/OpenVoiceOS/ovos-translate-server-plugin/tree/V0.0.4) (2025-06-08)
+## [0.0.8a2](https://github.com/OpenVoiceOS/ovos-translate-server-plugin/tree/0.0.8a2) (2026-07-26)
 
-[Full Changelog](https://github.com/OpenVoiceOS/ovos-translate-server-plugin/compare/0.0.4...V0.0.4)
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-translate-server-plugin/compare/0.0.8a1...0.0.8a2)
+
+**Merged pull requests:**
+
+- docs: timeout docstring says default 20 but code default is 5 [\#29](https://github.com/OpenVoiceOS/ovos-translate-server-plugin/pull/29) ([JarbasAl](https://github.com/JarbasAl))
+
+## [0.0.8a1](https://github.com/OpenVoiceOS/ovos-translate-server-plugin/tree/0.0.8a1) (2026-06-16)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-translate-server-plugin/compare/0.0.7a2...0.0.8a1)
+
+**Merged pull requests:**
+
+- fix: require ovos-plugin-manager\>=2.1.0 for opm.\* entry points and cap ovos-\* deps at next major [\#27](https://github.com/OpenVoiceOS/ovos-translate-server-plugin/pull/27) ([JarbasAl](https://github.com/JarbasAl))
+
+## [0.0.7a2](https://github.com/OpenVoiceOS/ovos-translate-server-plugin/tree/0.0.7a2) (2026-06-16)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-translate-server-plugin/compare/0.0.7a1...0.0.7a2)
+
+**Merged pull requests:**
+
+- chore: add missing shared CI workflows [\#25](https://github.com/OpenVoiceOS/ovos-translate-server-plugin/pull/25) ([JarbasAl](https://github.com/JarbasAl))
+
+## [0.0.7a1](https://github.com/OpenVoiceOS/ovos-translate-server-plugin/tree/0.0.7a1) (2026-06-11)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-translate-server-plugin/compare/0.0.6a6...0.0.7a1)
+
+**Merged pull requests:**
+
+- fix: configurable request timeout and 5xx failover on public servers [\#21](https://github.com/OpenVoiceOS/ovos-translate-server-plugin/pull/21) ([JarbasAl](https://github.com/JarbasAl))
+
+## [0.0.6a6](https://github.com/OpenVoiceOS/ovos-translate-server-plugin/tree/0.0.6a6) (2026-01-06)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-translate-server-plugin/compare/0.0.6a4...0.0.6a6)
+
+## [0.0.6a4](https://github.com/OpenVoiceOS/ovos-translate-server-plugin/tree/0.0.6a4) (2026-01-06)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-translate-server-plugin/compare/0.0.6a3...0.0.6a4)
+
+**Merged pull requests:**
+
+- add tigregotico.pt server [\#18](https://github.com/OpenVoiceOS/ovos-translate-server-plugin/pull/18) ([JarbasAl](https://github.com/JarbasAl))
+- chore\(deps\): update actions/checkout action to v6 [\#14](https://github.com/OpenVoiceOS/ovos-translate-server-plugin/pull/14) ([renovate[bot]](https://github.com/apps/renovate))
+
+## [0.0.6a3](https://github.com/OpenVoiceOS/ovos-translate-server-plugin/tree/0.0.6a3) (2025-12-19)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-translate-server-plugin/compare/0.0.6a2...0.0.6a3)
+
+**Merged pull requests:**
+
+- chore\(deps\): update actions/setup-python action to v6 [\#16](https://github.com/OpenVoiceOS/ovos-translate-server-plugin/pull/16) ([renovate[bot]](https://github.com/apps/renovate))
+
+## [0.0.6a2](https://github.com/OpenVoiceOS/ovos-translate-server-plugin/tree/0.0.6a2) (2025-12-19)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-translate-server-plugin/compare/0.0.6a1...0.0.6a2)
+
+**Merged pull requests:**
+
+- chore\(deps\): update dependency python to 3.14 [\#13](https://github.com/OpenVoiceOS/ovos-translate-server-plugin/pull/13) ([renovate[bot]](https://github.com/apps/renovate))
+
+## [0.0.6a1](https://github.com/OpenVoiceOS/ovos-translate-server-plugin/tree/0.0.6a1) (2025-12-18)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-translate-server-plugin/compare/V0.0.5...0.0.6a1)
+
+**Merged pull requests:**
+
+- chore: Configure Renovate [\#11](https://github.com/OpenVoiceOS/ovos-translate-server-plugin/pull/11) ([renovate[bot]](https://github.com/apps/renovate))
+
+## [V0.0.5](https://github.com/OpenVoiceOS/ovos-translate-server-plugin/tree/V0.0.5) (2025-11-05)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-translate-server-plugin/compare/0.0.5...V0.0.5)
 
 
 
