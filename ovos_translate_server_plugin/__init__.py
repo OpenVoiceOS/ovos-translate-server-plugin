@@ -8,6 +8,27 @@ from typing import Union, List, Dict, Optional, Set
 _DEFAULT_TIMEOUT = 5  # seconds
 
 
+def _reply_text(r: requests.Response) -> str:
+    """Read the body of a /detect or /translate reply.
+
+    ovos-translate-server 0.1.0 and later answer with a JSON string, and the
+    older Flask server answers with plain text. A JSON list holds the
+    detected language first. Plain text is never decoded, because a
+    translation can itself look like JSON.
+    """
+    if not r.headers.get("Content-Type", "").startswith("application/json"):
+        return r.text
+    try:
+        value = r.json()
+    except ValueError:
+        return r.text
+    if isinstance(value, list) and value and isinstance(value[0], str):
+        return value[0]
+    if isinstance(value, str):
+        return value
+    return r.text
+
+
 class OVOSLangDetectServer(LanguageDetector):
     PUBLIC_MODEL = "ovos-lang-detector-fasttext-plugin"  # manually maintained, public servers need to respect this to get added to list
     public_servers = [
@@ -50,10 +71,7 @@ class OVOSLangDetectServer(LanguageDetector):
                     LOG.warning(f"Server error {r.status_code} from {url}/detect — trying next server")
                     continue
                 if r.ok:
-                    try:
-                        return r.json()[0]
-                    except Exception:
-                        return r.text
+                    return _reply_text(r)
             except requests.exceptions.Timeout:
                 LOG.warning(f"Timeout contacting {url}/detect — trying next server")
             except Exception:
@@ -164,10 +182,7 @@ class OVOSTranslateServer(LanguageTranslator):
                     if r.status_code >= 500:
                         LOG.warning(f"Server error {r.status_code} from {url}/detect — trying next server")
                         continue
-                    try:
-                        source_for_url = r.json()[0]
-                    except Exception:
-                        source_for_url = r.text
+                    source_for_url = _reply_text(r)
 
                 if source_for_url:
                     u = f'{url}/translate/{source_for_url}/{target}/{text}'
@@ -180,7 +195,7 @@ class OVOSTranslateServer(LanguageTranslator):
                     LOG.warning(f"Server error {r.status_code} from {url}/translate — trying next server")
                     continue
                 if r.ok:
-                    return r.text
+                    return _reply_text(r)
             except requests.exceptions.Timeout:
                 LOG.warning(f"Timeout contacting {url} — trying next server")
             except Exception:
