@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.0.9a1](https://github.com/OpenVoiceOS/ovos-translate-server-plugin/tree/0.0.9a1) (2026-10-20)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-translate-server-plugin/compare/0.0.8a3...0.0.9a1)
+
+**Merged pull requests:**
+
+- fix: read the JSON string replies of ovos-translate-server [\#33](https://github.com/OpenVoiceOS/ovos-translate-server-plugin/pull/33) ([openvoiceos-bot](https://github.com/openvoiceos-bot))
+
 ## [0.0.8a3](https://github.com/OpenVoiceOS/ovos-translate-server-plugin/tree/0.0.8a3) (2026-08-01)
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos-translate-server-plugin/compare/0.0.8a2...0.0.8a3)
