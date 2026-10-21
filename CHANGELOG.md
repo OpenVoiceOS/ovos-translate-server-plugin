@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.0.10a1](https://github.com/OpenVoiceOS/ovos-translate-server-plugin/tree/0.0.10a1) (2026-10-21)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-translate-server-plugin/compare/0.0.9a1...0.0.10a1)
+
+**Merged pull requests:**
+
+- fix: surface a server's 4xx reply instead of "servers down" [\#35](https://github.com/OpenVoiceOS/ovos-translate-server-plugin/pull/35) ([openvoiceos-bot](https://github.com/openvoiceos-bot))
+
 ## [0.0.9a1](https://github.com/OpenVoiceOS/ovos-translate-server-plugin/tree/0.0.9a1) (2026-10-20)
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos-translate-server-plugin/compare/0.0.8a3...0.0.9a1)
