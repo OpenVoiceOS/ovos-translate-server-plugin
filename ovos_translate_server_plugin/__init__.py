@@ -29,6 +29,30 @@ def _reply_text(r: requests.Response) -> str:
     return r.text
 
 
+class ServerRequestError(ValueError):
+    """A reachable server rejected the request (HTTP 4xx), e.g. an unsupported language."""
+
+
+def _raise_for_client_error(r: requests.Response) -> None:
+    """Raise the server's own error for a 400 or 422 reply instead of trying the next server.
+
+    Other client errors (404 for an unrouted path, 401, 403 or 429 from a proxy)
+    can be specific to one server, so those still fail over.
+    """
+    if r.status_code not in (400, 422):
+        return
+    try:
+        detail = r.json()["detail"]
+    except (ValueError, KeyError, TypeError):
+        detail = r.text
+    if isinstance(detail, list):
+        detail = "; ".join(
+            f"{'.'.join(str(p) for p in d.get('loc', []))}: {d.get('msg', d)}"
+            if isinstance(d, dict) else str(d)
+            for d in detail)
+    raise ServerRequestError(f"{r.status_code}: {detail}")
+
+
 class OVOSLangDetectServer(LanguageDetector):
     PUBLIC_MODEL = "ovos-lang-detector-fasttext-plugin"  # manually maintained, public servers need to respect this to get added to list
     public_servers = [
@@ -70,10 +94,13 @@ class OVOSLangDetectServer(LanguageDetector):
                 if r.status_code >= 500:
                     LOG.warning(f"Server error {r.status_code} from {url}/detect — trying next server")
                     continue
+                _raise_for_client_error(r)
                 if r.ok:
                     return _reply_text(r)
             except requests.exceptions.Timeout:
                 LOG.warning(f"Timeout contacting {url}/detect — trying next server")
+            except ServerRequestError:
+                raise
             except Exception:
                 LOG.exception(f"Error contacting {url}/detect")
         raise RuntimeError("All OVOS Translate servers are down!")
@@ -95,10 +122,13 @@ class OVOSLangDetectServer(LanguageDetector):
                 if r.status_code >= 500:
                     LOG.warning(f"Server error {r.status_code} from {url}/classify — trying next server")
                     continue
+                _raise_for_client_error(r)
                 if r.ok:
                     return r.json()
             except requests.exceptions.Timeout:
                 LOG.warning(f"Timeout contacting {url}/classify — trying next server")
+            except ServerRequestError:
+                raise
             except Exception:
                 LOG.exception(f"Error contacting {url}/classify")
         raise RuntimeError("All OVOS Translate servers are down!")
@@ -182,6 +212,10 @@ class OVOSTranslateServer(LanguageTranslator):
                     if r.status_code >= 500:
                         LOG.warning(f"Server error {r.status_code} from {url}/detect — trying next server")
                         continue
+                    _raise_for_client_error(r)
+                    if not r.ok:
+                        LOG.warning(f"Reply {r.status_code} from {url}/detect — trying next server")
+                        continue
                     source_for_url = _reply_text(r)
 
                 if source_for_url:
@@ -194,10 +228,13 @@ class OVOSTranslateServer(LanguageTranslator):
                 if r.status_code >= 500:
                     LOG.warning(f"Server error {r.status_code} from {url}/translate — trying next server")
                     continue
+                _raise_for_client_error(r)
                 if r.ok:
                     return _reply_text(r)
             except requests.exceptions.Timeout:
                 LOG.warning(f"Timeout contacting {url} — trying next server")
+            except ServerRequestError:
+                raise
             except Exception:
                 LOG.exception(f"Error contacting {url}")
         raise RuntimeError("All OVOS Translate servers are down!")
