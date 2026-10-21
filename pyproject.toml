@@ -1,0 +1,33 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ovos-translate-server-plugin"
+dynamic = ["version"]
+description = "OVOS translation module for self hosted plugins"
+readme = "README.md"
+license = "Apache-2.0"
+authors = [{name = "JarbasAi", email = "jarbasai@mailfence.com"}]
+requires-python = ">=3.9"
+keywords = ["plugin", "lang", "detect", "translate", "OVOS", "OpenVoiceOS"]
+dependencies = [
+    "requests",
+    "ovos-plugin-manager>=2.1.0,<3.0.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/OpenVoiceOS/ovos-translate-server-plugin"
+Repository = "https://github.com/OpenVoiceOS/ovos-translate-server-plugin"
+
+[project.entry-points."opm.lang.translate"]
+"ovos-translate-plugin-server" = "ovos_translate_server_plugin:OVOSTranslateServer"
+
+[project.entry-points."opm.lang.detect"]
+"ovos-lang-detector-plugin-server" = "ovos_translate_server_plugin:OVOSLangDetectServer"
+
+[tool.setuptools.packages.find]
+include = ["ovos_translate_server_plugin*"]
+
+[tool.setuptools.dynamic]
+version = {attr = "ovos_translate_server_plugin.version.__version__"}
