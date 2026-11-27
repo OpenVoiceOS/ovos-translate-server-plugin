@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.0.11a1](https://github.com/OpenVoiceOS/ovos-translate-server-plugin/tree/0.0.11a1) (2026-11-27)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-translate-server-plugin/compare/0.0.10a1...0.0.11a1)
+
+**Merged pull requests:**
+
+- fix: allow ovos-plugin-manager 3 [\#37](https://github.com/OpenVoiceOS/ovos-translate-server-plugin/pull/37) ([openvoiceos-bot](https://github.com/openvoiceos-bot))
+
 ## [0.0.10a1](https://github.com/OpenVoiceOS/ovos-translate-server-plugin/tree/0.0.10a1) (2026-10-21)
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos-translate-server-plugin/compare/0.0.9a1...0.0.10a1)
